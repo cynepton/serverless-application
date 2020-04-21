@@ -7,16 +7,16 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
 
-  stage: ${opt:stage, 'dev'}
-  region: eu-west-3
+  stage: dev
+  region: ${opt:region, 'us-east-2'}
 
   environment:
     TODOS_TABLE: serverlessTodo-app-${self:provider.stage}
     USER_ID_INDEX: UserIdIndex
     S3_BUCKET: todos-images-${self:provider.stage}
-    SIGNED_URL_EXPIRATION: 600
+    SIGNED_URL_EXPIRATION: 6000
 
 functions:
 
@@ -105,7 +105,7 @@ functions:
         Action:
           - s3:PutObject
           - s3:GetObject
-        Resource: arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*
+        Resource: arn:aws:s3:::todos-images-dev/*
 
 resources:
   Resources:
@@ -153,7 +153,7 @@ resources:
                 - POST
                 - DELETE
                 - HEAD
-              MaxAge: 3000
+              #MaxAge: 3000
 
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
@@ -167,4 +167,5 @@ resources:
               Principal: "*"
               Action: "s3:GetObject"
               Resource: "arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*"
-        Bucket: !Ref AttachmentBucket
+        Bucket: 
+          Ref: ${self:provider.environment.S3_BUCKET}

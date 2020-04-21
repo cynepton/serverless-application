@@ -4,7 +4,7 @@ import {deleteTodo} from '../../businessLogic/todos'
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  const todoId = event.pathParameters.todoId
+  //const todoId = event.pathParameters.todoId
 
   // TODO: Remove a TODO item by id
   const deleted = await deleteTodo(event);

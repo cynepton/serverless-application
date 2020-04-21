@@ -1,6 +1,7 @@
 import * as AWS from "aws-sdk";
 import * as AWSXRay from "aws-xray-sdk";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
+//import {DocumentClient } from "aws-sdk/lib/dynamodb/document_client.d";
 
 const XAWS = AWSXRay.captureAWS(AWS);
 
