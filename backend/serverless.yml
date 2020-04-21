@@ -9,7 +9,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs8.10
   tracing:
     apiGateway : true
   stage: ${opt:stage, 'dev'}
@@ -18,7 +18,7 @@ provider:
   environment:
     PROJECT_NAME: udacity-p4
     TODOS_TABLE: udacity-p4-serverless-application-todo-${self:provider.stage}
-    S3_BUCKET_NAME: isaac-todo-images-bucket-${self:provider.stage}
+    S3_BUCKET_NAME: udacity-p4-serverless-application-todo-${self:provider.stage}
 
 custom:
   documentation:
@@ -198,5 +198,4 @@ resources:
                 - '*'
               AllowedMethods:
                 - PUT
-              MaxAge: 3600
-   
+              MaxAge: 300
