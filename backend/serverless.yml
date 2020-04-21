@@ -1,5 +1,5 @@
 service:
-  name: serverless-todo-app
+  name: udacity-p4-serverless-application
 
 plugins:
   - serverless-webpack
@@ -9,24 +9,24 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs8.10
   tracing:
     apiGateway : true
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
 
   environment:
-    PROJECT_NAME: serverless-todo
-    TODOS_TABLE: serverless-application-todo-${self:provider.stage}
-    S3_BUCKET_NAME: isaac-serverless-application-todo-c4-${self:provider.stage}
+    PROJECT_NAME: udacity-p4
+    TODOS_TABLE: udacity-p4-serverless-application-todo-${self:provider.stage}
+    S3_BUCKET_NAME: udacity-p4-serverless-application-todo-${self:provider.stage}
 
 custom:
   documentation:
     api:
       info:
         version: '1.0.0'
-        title: udacity-serverless-application-todo-api
-        description: udacity-serverless-application-todo-api
+        title: udacity-p4-serverless-application-todo-api
+        description: udacity-p4-serverless-application-todo-api
     models:
       - name: CreateTodoRequest
         contentType: "application/json"
@@ -198,4 +198,4 @@ resources:
                 - '*'
               AllowedMethods:
                 - PUT
-              MaxAge: 3600
+              MaxAge: 300
