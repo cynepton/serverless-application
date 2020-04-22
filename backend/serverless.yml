@@ -9,7 +9,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   tracing:
     apiGateway : true
   stage: ${opt:stage, 'dev'}
