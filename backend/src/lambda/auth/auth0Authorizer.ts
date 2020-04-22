@@ -10,7 +10,7 @@ const jwkToPem = require('jwk-to-pem');
 
 const logger = createLogger('auth');
 
-const jwksUrl = 'https://dev-v26hgl6u.auth0.com/.well-known/jwks.json';
+const jwksUrl = 'https://dev-34f3-2rh.auth0.com/.well-known/jwks.json';
 
 export const handler = async (event: CustomAuthorizerEvent): Promise<CustomAuthorizerResult> => {
   logger.info('Authorizing a user', event.authorizationToken);
