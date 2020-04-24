@@ -60,11 +60,13 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
   const signingKey = responseData['keys'].find(key => key['kid'] === jwt['header']['kid']);
   if (!signingKey) {
     throw new Error('Invalid Signing key');
+    logger.error("Invailid Signing Key")
   }
   return verify(token, jwkToPem(signingKey), {algorithms: ['RS256']}) as JwtPayload;
 }
 
 function getToken(authHeader: string): string {
+  logger.info("Getting Token")
   if (!authHeader) throw new Error('No authentication header');
 
   if (!authHeader.toLowerCase().startsWith('bearer '))

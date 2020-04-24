@@ -11,7 +11,8 @@ provider:
   name: aws
   runtime: nodejs12.x
   tracing:
-    apiGateway : true
+    lambda: true
+    apiGateway: true
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
 
@@ -74,6 +75,12 @@ functions:
         Action:
           - dynamodb:Query
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+      - Effect: 'Allow'          # Tracing permissions!  
+        Action:
+          - 'xray:PutTraceSegments'    
+          - 'xray:PutTelemetryRecords'
+        Resource:
+          - '*'
 
   # TODO: Configure this function
   CreateTodo:
@@ -96,7 +103,12 @@ functions:
         Action:
           - dynamodb:PutItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
-
+      - Effect: 'Allow'          # Tracing permissions!  
+        Action:
+          - 'xray:PutTraceSegments'    
+          - 'xray:PutTelemetryRecords'
+        Resource:
+          - '*'
 
   # TODO: Configure this function
   UpdateTodo:
@@ -119,6 +131,12 @@ functions:
         Action:
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+      - Effect: 'Allow'          # Tracing permissions!  
+        Action:
+          - 'xray:PutTraceSegments'    
+          - 'xray:PutTelemetryRecords'
+        Resource:
+          - '*'
 
   # TODO: Configure this function
   DeleteTodo:
@@ -139,6 +157,12 @@ functions:
         Action:
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+      - Effect: 'Allow'          # Tracing permissions!  
+        Action:
+          - 'xray:PutTraceSegments'    
+          - 'xray:PutTelemetryRecords'
+        Resource:
+          - '*'
 
   # TODO: Configure this function
   GenerateUploadUrl:
@@ -159,6 +183,12 @@ functions:
         Action:
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+      - Effect: 'Allow'          # Tracing permissions!  
+        Action:
+          - 'xray:PutTraceSegments'    
+          - 'xray:PutTelemetryRecords'
+        Resource:
+          - '*'
 
 resources:
   Resources:
